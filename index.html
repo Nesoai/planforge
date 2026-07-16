@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PlanForge — will your business model hold?</title>
+<meta name="description" content="PlanForge turns your pricing, costs, and growth into a 12–36 month financial model: revenue, break-even, runway, and a plan skeleton you can build on — free, in your browser.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230d1117'/%3E%3Cpath d='M7 24 L13 17 L18 20 L25 9' fill='none' stroke='%2334d399' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Crect x='6' y='25' width='20' height='2.6' rx='1.3' fill='%23eab308'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0d1117">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+const GA_ID="";
+if(GA_ID){const s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config',GA_ID);}
+</script>
+<style>
+:root{--bg:#0d1117;--panel:#11161d;--card:#161d26;--line:#232f3d;--ink:#e9eef4;--dim:#96a6b6;--faint:#5e7080;
+--green:#34d399;--gold:#eab308;--sky:#38bdf8;--bad:#f87171;--purp:#a78bfa}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:14.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--sky)}
+header{display:flex;align-items:center;gap:10px;padding:13px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(13,17,23,.92);backdrop-filter:blur(8px);z-index:50}
+#logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:17px;letter-spacing:-.01em}
+#logo b{color:var(--green)}
+.hsp{flex:1}
+.pill{font-size:12px;font-weight:600;border:1px solid var(--line);border-radius:999px;padding:6px 13px;color:var(--dim);background:var(--card);cursor:pointer}
+.pill.pro{background:linear-gradient(90deg,#34d399,#22c08a);color:#04211a;border:none;font-weight:700}
+.pill.prodone{background:var(--card);color:var(--green);border:1px solid var(--green)}
+.tagline{background:linear-gradient(120deg,rgba(52,211,153,.09),rgba(234,179,8,.06));border-bottom:1px solid var(--line);padding:18px 16px;text-align:center}
+.tagline h1{font-family:Fraunces,serif;font-size:clamp(20px,3.4vw,28px)}
+.tagline h1 em{font-style:italic;color:var(--green)}
+.tagline p{color:var(--dim);font-size:13.5px;margin:6px auto 0;max-width:76ch}
+/* how-it-works strip */
+.flow{display:flex;align-items:stretch;gap:0;max-width:980px;margin:14px auto 0;padding:0 16px}
+.flow .fstep{flex:1;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px;text-align:left;display:flex;gap:10px;align-items:flex-start;min-width:0}
+.flow .fn{width:24px;height:24px;border-radius:50%;background:var(--green);color:#04211a;font-weight:800;font-size:12.5px;display:grid;place-items:center;flex-shrink:0;margin-top:1px}
+.flow .ft b{display:block;font-size:12.5px;color:var(--ink)}
+.flow .ft span{font-size:11.5px;color:var(--dim);line-height:1.45}
+.flow .farrow{align-self:center;color:var(--faint);font-size:17px;padding:0 7px;flex-shrink:0}
+@media(max-width:700px){.flow{flex-direction:column;gap:6px}.flow .farrow{transform:rotate(90deg);align-self:center;padding:0}}
+#app{display:grid;grid-template-columns:390px 1fr;gap:22px;max-width:1180px;margin:22px auto 60px;padding:0 16px}
+@media(max-width:900px){#app{grid-template-columns:1fr}}
+#inputs{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;height:fit-content}
+.lbl{display:block;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--dim);margin:16px 0 7px}
+.lbl:first-of-type{margin-top:0}
+.tin{width:100%;background:var(--card);border:1px solid var(--line);border-radius:9px;color:var(--ink);padding:10px 12px;font-size:14px;font-family:inherit}
+.tin:focus{outline:none;border-color:var(--green)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.segrow{display:flex;gap:7px;flex-wrap:wrap}
+.seg{border:1px solid var(--line);background:var(--card);color:var(--dim);border-radius:9px;padding:8px 12px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+.seg.on{border-color:var(--green);color:var(--green);background:rgba(52,211,153,.08)}
+.mini{font-size:11.5px;color:var(--faint);margin-top:4px}
+.tip{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;background:var(--line);color:var(--dim);font-size:10px;cursor:help;position:relative;vertical-align:middle}
+.tip .tipbox{display:none;position:absolute;bottom:130%;left:50%;transform:translateX(-50%);width:230px;background:var(--card);border:1px solid var(--line);border-radius:9px;padding:9px 11px;font-size:12px;color:var(--dim);z-index:20;text-transform:none;letter-spacing:0;font-weight:500;line-height:1.5}
+.tip:hover .tipbox,.tip:focus .tipbox{display:block}
+#runBtn{width:100%;margin-top:18px;border:none;border-radius:11px;padding:13px;font-weight:800;font-size:14.5px;background:var(--green);color:#04211a;cursor:pointer;font-family:inherit}
+#runBtn:hover{filter:brightness(1.08)}
+.exbtn{width:100%;border:1px dashed var(--green);background:rgba(52,211,153,.07);color:var(--green);border-radius:10px;padding:10px;font-weight:700;font-size:13px;cursor:pointer;margin-bottom:14px;font-family:inherit}
+.exbtn:hover{background:rgba(52,211,153,.14)}
+.exbanner{display:none;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.35);border-radius:10px;padding:9px 12px;font-size:12.5px;color:var(--dim);margin-bottom:14px}
+.exbanner b{color:var(--green)}
+/* output */
+.verdict{display:flex;gap:14px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--green);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+.verdict.warn{border-left-color:var(--gold)}
+.verdict.bad{border-left-color:var(--bad)}
+.verdict .vbig{font-family:Fraunces,serif;font-size:30px;font-weight:700;line-height:1.05;white-space:nowrap}
+.verdict h3{font-size:15px;margin-bottom:3px}
+.verdict p{font-size:13px;color:var(--dim)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-bottom:16px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:12px 14px}
+.kpi .kl{font-size:10.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--faint)}
+.kpi b{display:block;font-family:Fraunces,serif;font-size:21px;font-weight:700;margin-top:3px;color:var(--ink)}
+.kpi .kn{font-size:11px;color:var(--faint);margin-top:1px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+.card h4{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--green);margin-bottom:11px}
+/* cash chart */
+.chart{display:flex;align-items:flex-end;gap:3px;height:120px;margin:6px 0 4px}
+.chart .bar{flex:1;min-width:4px;background:var(--green);border-radius:3px 3px 0 0;position:relative;opacity:.85}
+.chart .bar.neg{background:var(--bad);align-self:flex-start;border-radius:0 0 3px 3px}
+.chart .bar:hover{opacity:1}
+.chart .bar .bt{display:none;position:absolute;bottom:105%;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--line);border-radius:7px;padding:4px 8px;font-size:11px;white-space:nowrap;z-index:5}
+.chart .bar:hover .bt{display:block}
+.axis{display:flex;justify-content:space-between;font-size:10.5px;color:var(--faint)}
+/* table */
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{text-align:right;padding:7px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);font-weight:700}
+td:first-child,th:first-child{text-align:left}
+td.neg{color:var(--bad)}
+.tscroll{overflow-x:auto}
+.yrhead td{background:var(--panel);color:var(--green);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+/* narrative */
+.narr p{font-size:13.5px;color:var(--dim);margin:8px 0}
+.narr b{color:var(--ink)}
+.copybtn{border:1px solid var(--line);background:var(--panel);color:var(--dim);border-radius:8px;padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:8px}
+.lockedsec{background:rgba(234,179,8,.06);border:1px dashed rgba(234,179,8,.4);border-radius:11px;padding:13px 15px;font-size:13px;color:var(--dim);margin-bottom:16px}
+.lockedsec b{color:var(--gold)}
+.lockbtn{display:inline-block;border:none;border-radius:9px;background:var(--gold);color:#221a03;font-weight:700;font-size:12.5px;padding:8px 14px;cursor:pointer;font-family:inherit;text-decoration:none;margin-top:8px}
+.rowbtns{display:flex;gap:9px;flex-wrap:wrap;margin-top:4px}
+.smallbtn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:9px;padding:9px 14px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit}
+.cta-neso{display:flex;gap:13px;align-items:center;background:linear-gradient(120deg,rgba(52,211,153,.08),rgba(234,179,8,.06));border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin-top:16px;flex-wrap:wrap}
+.cta-neso p{font-size:13px;color:var(--dim);flex:1;min-width:220px}
+.cta-neso b{color:var(--ink)}
+.cta-neso a{background:var(--green);color:#04211a;font-weight:700;font-size:13px;border-radius:999px;padding:10px 17px;text-decoration:none}
+footer{border-top:1px solid var(--line);padding:20px 18px;font-size:12px;color:var(--faint);text-align:center;line-height:1.7}
+#modal{position:fixed;inset:0;background:rgba(5,8,12,.7);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:80;padding:18px}
+#modal.on{display:flex}
+#mcard{background:var(--panel);border:1px solid var(--line);border-radius:16px;max-width:460px;width:100%;padding:22px;position:relative;max-height:86vh;overflow:auto}
+#mcard h2{font-family:Fraunces,serif;font-size:20px;margin-bottom:10px}
+.closex{position:absolute;top:10px;right:14px;border:none;background:none;color:var(--dim);font-size:22px;cursor:pointer}
+#toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(90px);background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:11px 20px;font-size:13.5px;font-weight:600;z-index:90;transition:transform .25s}
+#toast.on{transform:translateX(-50%) translateY(0)}
+/* tour */
+.tourhl{outline:2px solid var(--green);outline-offset:3px;border-radius:10px;transition:outline .2s}
+#tourCard{position:fixed;left:50%;bottom:18px;transform:translateX(-50%) translateY(140%);width:min(440px,92vw);background:var(--card);border:1px solid var(--green);border-radius:14px;padding:15px 17px;z-index:95;box-shadow:0 18px 50px -12px rgba(0,0,0,.6);transition:transform .3s}
+#tourCard.on{transform:translateX(-50%) translateY(0)}
+#tourCard .tstep{font-size:10.5px;font-weight:700;letter-spacing:.1em;color:var(--green);text-transform:uppercase}
+#tourCard .ttext{font-size:13.5px;color:var(--ink);margin:5px 0 12px;line-height:1.5}
+#tourCard .tbtns{display:flex;gap:8px;justify-content:flex-end}
+#tourCard .tbtns button{border:1px solid var(--line);background:var(--panel);color:var(--dim);border-radius:8px;padding:7px 14px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:inherit}
+#tourCard .tbtns button.pri{background:var(--green);border-color:var(--green);color:#04211a}
+@media print{
+ header,.tagline,.flow,#inputs,.rowbtns,.lockedsec,.cta-neso,footer,#toast,#modal,#tourCard,.exbtn,.exbanner,.copybtn{display:none!important}
+ body{background:#fff;color:#000}
+ #app{display:block}
+ .card,.kpi,.verdict{border-color:#ccc;break-inside:avoid;background:#fff}
+ .kpi b,.verdict .vbig{color:#000}
+}
+</style>
+</head>
+<body>
+<header>
+  <div id="logo"><svg width="25" height="25" viewBox="0 0 32 32"><path d="M7 24 L13 17 L18 20 L25 9" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="6" y="26" width="20" height="2.6" rx="1.3" fill="#eab308"/></svg> Plan<b>Forge</b></div>
+  <div class="hsp"></div>
+  <button class="pill" id="tourBtn" title="Replay the 60-second tour">&#127891; Tour</button>
+  <button class="pill pro" id="proBtn">Go Pro</button>
+</header>
+
+<div class="tagline">
+  <h1>Will the business model <em>hold?</em></h1>
+  <p>Before you write a 30-page plan, answer the question underneath it: at your price, your costs, and your growth &mdash; when does this business break even, and does the cash last until it does? PlanForge turns nine numbers into a monthly model, the answer, and a plan skeleton to build on.</p>
+</div>
+
+<div class="flow" aria-label="How PlanForge works">
+  <div class="fstep"><div class="fn">1</div><div class="ft"><b>Describe the money in</b><span>What you charge, how many you&#8217;ll sell in month one, and how fast that grows.</span></div></div>
+  <div class="farrow">&rarr;</div>
+  <div class="fstep"><div class="fn">2</div><div class="ft"><b>Describe the money out</b><span>Direct costs, payroll, rent, marketing &mdash; plus startup costs and the cash you&#8217;re starting with.</span></div></div>
+  <div class="farrow">&rarr;</div>
+  <div class="fstep"><div class="fn">3</div><div class="ft"><b>Read the verdict</b><span>Break-even month, runway, margins, a monthly model, and starter narrative for the written plan.</span></div></div>
+</div>
+
+<div id="app">
+  <div id="inputs">
+    <button class="exbtn" id="exBtn">&#9654; Load an example business &mdash; see a finished model first</button>
+    <div class="exbanner" id="exBanner"><b>Harborline Coffee</b> &mdash; a caf&eacute; opening with $110k in the bank: $6.50 average ticket, 2,400 tickets in month one, growing 6%/mo. Watch when it breaks even &mdash; then edit anything; it&#8217;s yours the moment you type.</div>
+
+    <label class="lbl">Business name</label>
+    <input class="tin" id="bname" placeholder="e.g. Harborline Coffee">
+
+    <label class="lbl">What do you sell?</label>
+    <div class="segrow" id="whatRow"></div>
+
+    <label class="lbl">How do you charge?</label>
+    <div class="segrow" id="modelRow"></div>
+
+    <label class="lbl" id="priceLbl">Average sale ($) <span class="tip" tabindex="0">?<span class="tipbox">Your average revenue per sale. For subscriptions this is the monthly price per customer; for hourly work, your billed rate &times; average hours per engagement.</span></span></label>
+    <div class="two">
+      <div><input class="tin" id="priceIn" type="number" value="50" min="0" step="1"><div class="mini" id="priceNote">per sale</div></div>
+      <div><input class="tin" id="unitsIn" type="number" value="100" min="0" step="1"><div class="mini" id="unitsNote">sales in month 1</div></div>
+    </div>
+
+    <label class="lbl">Monthly growth % <span class="tip" tabindex="0">?<span class="tipbox">How much your sales volume grows each month. 3&ndash;5% is steady; 10%+ is aggressive and needs marketing spend to back it.</span></span></label>
+    <input class="tin" id="growIn" type="number" value="5" min="-20" max="50" step="0.5">
+
+    <label class="lbl">Direct cost % of each sale <span class="tip" tabindex="0">?<span class="tipbox">COGS: what each sale costs you to deliver &mdash; ingredients, materials, payment fees, delivery. Pure-service businesses are often 5&ndash;15%; retail/food 25&ndash;40%.</span></span></label>
+    <input class="tin" id="cogsIn" type="number" value="30" min="0" max="95" step="1">
+
+    <label class="lbl">Monthly fixed costs ($)</label>
+    <div class="two">
+      <div><input class="tin" id="payIn" type="number" value="6000" step="100" min="0"><div class="mini">Payroll (incl. you)</div></div>
+      <div><input class="tin" id="rentIn" type="number" value="2000" step="100" min="0"><div class="mini">Rent &amp; utilities</div></div>
+    </div>
+    <div class="two" style="margin-top:10px">
+      <div><input class="tin" id="mktIn" type="number" value="800" step="50" min="0"><div class="mini">Marketing</div></div>
+      <div><input class="tin" id="othIn" type="number" value="500" step="50" min="0"><div class="mini">Everything else</div></div>
+    </div>
+
+    <label class="lbl">Startup &amp; cash ($)</label>
+    <div class="two">
+      <div><input class="tin" id="startupIn" type="number" value="25000" step="500" min="0"><div class="mini">One-time startup costs</div></div>
+      <div><input class="tin" id="cashIn" type="number" value="50000" step="500" min="0"><div class="mini">Cash + funding on hand</div></div>
+    </div>
+
+    <button id="runBtn">Forge the model &rarr;</button>
+    <p class="mini" style="margin-top:10px">Planning math with your assumptions &mdash; not accounting, tax, or investment advice. Nothing you enter leaves this device.</p>
+  </div>
+
+  <div id="out"><div id="results"></div></div>
+</div>
+
+<footer><span class="np">PlanForge &middot; a <a href="https://nesoai.github.io/mallory/" target="_blank" rel="noopener">Boundless</a> tool &middot; v1.0 &middot; &copy; 2026 Boundless / Mallory Bailey-Finkley &mdash; all rights reserved &middot; </span>Educational planning estimates only. Verify with your CPA and advisors. Sister tools: <a href="https://nesoai.github.io/grantfit/">GrantFit</a> + <a href="https://nesoai.github.io/capstack/">CapStack</a>.</footer>
+<div id="modal"><div id="mcard"><button class="closex" id="mClose">&times;</button><h2 id="mTitle"></h2><div id="mBody"></div></div></div>
+<div id="toast"></div>
+<div id="tourCard" role="dialog" aria-label="Guided tour">
+  <div class="tstep" id="tourStep"></div>
+  <div class="ttext" id="tourText"></div>
+  <div class="tbtns"><button id="tourSkip">Skip</button><button class="pri" id="tourNext">Next</button></div>
+</div>
+
+<script>
+/* ============ PLANFORGE v1.0 ============ */
+const BUY_URL="mailto:nesoai.us@gmail.com?subject="+encodeURIComponent("Requesting PlanForge Pro ($29)")+"&body="+encodeURIComponent("Hi Boundless — I'd like PlanForge Pro. Please send my unlock code and how to pay."); // ← swap for Gumroad when live
+const PRICE_TXT="$29 one-time";
+const NESO_CTA="https://tally.so/r/q4MLYg?track=biz&services="+encodeURIComponent("Business Plan & Model (Standard)")+"&credits=10&source=planforge";
+
+const $=id=>document.getElementById(id);
+const KEY='planforge.v1';
+let S=Object.assign({pro:false},(()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}})());
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function toast(t){const x=$('toast');x.textContent=t;x.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.remove('on'),2600)}
+const fm=n=>'$'+Math.round(n).toLocaleString('en-US');
+const fk=n=>Math.abs(n)>=1000?('$'+(n/1000).toFixed(n%1000===0?0:1)+'k'):fm(n);
+
+/* ---- selectors ---- */
+const WHATS=[['prod','&#128230; Products'],['serv','&#128736; Services'],['both','&#127760; Both']];
+let WHAT='prod';
+const MODELS=[['sale','Per sale'],['sub','Monthly subscription'],['hr','Hourly / project']];
+let MODEL='sale';
+$('whatRow').innerHTML=WHATS.map(w=>`<button class="seg ${w[0]===WHAT?'on':''}" data-v="${w[0]}">${w[1]}</button>`).join('');
+$('whatRow').querySelectorAll('.seg').forEach(b=>b.onclick=()=>{WHAT=b.dataset.v;$('whatRow').querySelectorAll('.seg').forEach(x=>x.classList.toggle('on',x===b));run();});
+$('modelRow').innerHTML=MODELS.map(m=>`<button class="seg ${m[0]===MODEL?'on':''}" data-v="${m[0]}">${m[1]}</button>`).join('');
+$('modelRow').querySelectorAll('.seg').forEach(b=>b.onclick=()=>{MODEL=b.dataset.v;$('modelRow').querySelectorAll('.seg').forEach(x=>x.classList.toggle('on',x===b));
+  $('priceNote').textContent=MODEL==='sub'?'per customer / month':(MODEL==='hr'?'per engagement':'per sale');
+  $('unitsNote').textContent=MODEL==='sub'?'customers in month 1':(MODEL==='hr'?'engagements in month 1':'sales in month 1');
+  run();});
+['bname','priceIn','unitsIn','growIn','cogsIn','payIn','rentIn','mktIn','othIn','startupIn','cashIn'].forEach(id=>$(id).oninput=()=>run());
+$('runBtn').onclick=()=>{run();const r=$('results');if(r&&r.scrollIntoView)r.scrollIntoView({behavior:'smooth',block:'start'});};
+
+/* ---- model ---- */
+function compute(){
+  const price=+$('priceIn').value||0, u0=+$('unitsIn').value||0, g=(+$('growIn').value||0)/100;
+  const cogs=Math.min(95,Math.max(0,+$('cogsIn').value||0))/100;
+  const fixed=(+$('payIn').value||0)+(+$('rentIn').value||0)+(+$('mktIn').value||0)+(+$('othIn').value||0);
+  const startup=+$('startupIn').value||0, cash0=+$('cashIn').value||0;
+  const months=[];
+  let cash=cash0-startup, units=u0, beMonth=null, cashOutMonth=null, minCash=cash;
+  for(let m=1;m<=36;m++){
+    if(m>1) units=units*(1+g);
+    const rev=units*price, c=rev*cogs, gross=rev-c, net=gross-fixed;
+    cash+=net;
+    if(beMonth===null&&net>=0) beMonth=m;
+    if(cashOutMonth===null&&cash<0) cashOutMonth=m;
+    if(cash<minCash) minCash=cash;
+    months.push({m,units,rev,cogs:c,gross,fixed,net,cash});
+  }
+  const beUnits=(price*(1-cogs))>0?fixed/(price*(1-cogs)):Infinity;
+  const yr1rev=months.slice(0,12).reduce((a,x)=>a+x.rev,0);
+  const yr1net=months.slice(0,12).reduce((a,x)=>a+x.net,0);
+  return {price,u0,g,cogs,fixed,startup,cash0,months,beMonth,cashOutMonth,minCash,beUnits,yr1rev,yr1net,
+    gm:1-cogs, name:($('bname').value||'').trim()};
+}
+
+/* ---- render ---- */
+function unitWord(){return MODEL==='sub'?'customers':(MODEL==='hr'?'engagements':'sales');}
+function run(){
+  const R=compute();
+  const out=$('results');
+  if(!R.price||!R.u0){ out.innerHTML='<div class="card"><h4>Waiting on your numbers</h4><p style="color:var(--dim);font-size:13.5px">Enter a price and month-one volume on the left &mdash; or load the example &mdash; and the model builds itself here.</p></div>'; return; }
+
+  /* verdict */
+  let vc='verdict', vbig, vh, vp;
+  if(R.beMonth&&R.beMonth<=12&&!R.cashOutMonth){
+    vbig='Mo '+R.beMonth; vh='Breaks even in month '+R.beMonth+' &mdash; and the cash holds.';
+    vp='Monthly income covers monthly costs from month '+R.beMonth+', and cash never goes below '+fk(R.minCash)+'. This model holds &mdash; now pressure-test the growth assumption.';
+  } else if(R.beMonth&&!R.cashOutMonth){
+    vc='verdict warn'; vbig='Mo '+R.beMonth; vh='Breaks even in month '+R.beMonth+' &mdash; slower than a year.';
+    vp='The cash survives (low point '+fk(R.minCash)+'), but a '+R.beMonth+'-month climb to break-even means the plan needs either a faster ramp, lower fixed costs, or committed patient capital.';
+  } else if(R.beMonth&&R.cashOutMonth){
+    vc='verdict bad'; vbig='&#9888;'; vh='Breaks even in month '+R.beMonth+' &mdash; but the cash runs out in month '+R.cashOutMonth+'.';
+    vp='The model works on paper but dies in the bank account: you need roughly '+fk(Math.abs(R.minCash))+' more starting cash (or lower costs) to survive to break-even.';
+  } else {
+    vc='verdict bad'; vbig='&#10007;'; vh='This doesn&#8217;t break even in 36 months as entered.';
+    vp='Monthly fixed costs of '+fm(R.fixed)+' need '+(isFinite(R.beUnits)?Math.ceil(R.beUnits).toLocaleString()+' '+unitWord()+'/month':'a positive margin')+' at this price and margin. Raise the price, cut the direct cost, or rethink the fixed base.';
+  }
+
+  /* kpis */
+  const kpis=[
+    ['Break-even volume', isFinite(R.beUnits)?Math.ceil(R.beUnits).toLocaleString():'&mdash;', unitWord()+' / month'],
+    ['Gross margin', Math.round(R.gm*100)+'%', 'after direct costs'],
+    ['Monthly fixed', fk(R.fixed), 'payroll + rent + mktg + other'],
+    ['Year-1 revenue', fk(R.yr1rev), R.yr1net>=0?('+'+fk(R.yr1net)+' net'):(fk(R.yr1net)+' net')],
+    ['Cash low point', fk(R.minCash), R.cashOutMonth?('goes negative mo '+R.cashOutMonth):'stays positive']
+  ];
+
+  /* chart: cumulative cash */
+  const span=S.pro?36:12;
+  const vis=R.months.slice(0,span);
+  const maxAbs=Math.max(...vis.map(x=>Math.abs(x.cash)),1);
+  const bars=vis.map(x=>{
+    const h=Math.max(3,Math.round(Math.abs(x.cash)/maxAbs*110));
+    return `<div class="bar ${x.cash<0?'neg':''}" style="height:${h}px"><span class="bt">Mo ${x.m}: ${fk(x.cash)}</span></div>`;
+  }).join('');
+
+  /* table */
+  const rows=vis.map(x=>{
+    const yr = (x.m===13)?'<tr class="yrhead"><td colspan="6">Year 2</td></tr>' : (x.m===25)?'<tr class="yrhead"><td colspan="6">Year 3</td></tr>' : '';
+    return yr+`<tr><td>Mo ${x.m}</td><td>${Math.round(x.units).toLocaleString()}</td><td>${fk(x.rev)}</td><td>${fk(x.gross)}</td><td class="${x.net<0?'neg':''}">${fk(x.net)}</td><td class="${x.cash<0?'neg':''}">${fk(x.cash)}</td></tr>`;
+  }).join('');
+
+  /* narrative skeleton */
+  const nm=R.name||'The business';
+  const whatTxt=WHAT==='prod'?'sells products':(WHAT==='serv'?'provides services':'sells products and services');
+  const modelTxt=MODEL==='sub'?('on a subscription model at '+fm(R.price)+' per customer per month'):(MODEL==='hr'?('billing an average of '+fm(R.price)+' per engagement'):('at an average sale of '+fm(R.price)));
+  const narr=`
+    <p><b>The business.</b> ${nm} ${whatTxt} ${modelTxt}. Each sale carries a ${Math.round(R.gm*100)}% gross margin after direct costs.</p>
+    <p><b>The model.</b> Starting from ${Math.round(R.u0).toLocaleString()} ${unitWord()} in month one and growing ${(R.g*100).toFixed(1)}% monthly, the business ${R.beMonth?('reaches monthly break-even in month '+R.beMonth):'does not reach monthly break-even inside three years as currently priced'}. Break-even requires ${isFinite(R.beUnits)?Math.ceil(R.beUnits).toLocaleString():'&mdash;'} ${unitWord()} per month against ${fm(R.fixed)} in fixed costs.</p>
+    <p><b>The money.</b> With ${fm(R.cash0)} in starting cash and ${fm(R.startup)} in one-time startup costs, cash reaches its low point at ${fk(R.minCash)}${R.cashOutMonth?(' and goes negative in month '+R.cashOutMonth+', which defines the additional capital required'):' and recovers as operations scale'}. Year-one revenue projects to ${fk(R.yr1rev)}.</p>
+    <p><b>What to validate next.</b> The two assumptions that make or break this plan: month-one volume (${Math.round(R.u0).toLocaleString()} ${unitWord()}) and the ${(R.g*100).toFixed(1)}% monthly growth rate. Evidence for both &mdash; pre-orders, a waitlist, comparable businesses &mdash; is what turns this skeleton into a fundable plan.</p>`;
+
+  /* pro: sensitivity */
+  let sens='';
+  if(S.pro){
+    const test=(dp,dg)=>{
+      const price=R.price*(1+dp), g=R.g+dg;
+      let units=R.u0, cash=R.cash0-R.startup, be=null, out=null;
+      for(let m=1;m<=36;m++){ if(m>1)units*=(1+g); const net=units*price*(1-R.cogs)-R.fixed; cash+=net; if(be===null&&net>=0)be=m; if(out===null&&cash<0)out=m; }
+      return (be?('BE mo '+be):'no BE')+(out?(' &middot; cash out mo '+out):'');
+    };
+    sens=`<div class="card"><h4>Sensitivity &mdash; what moves the answer</h4>
+      <table><tr><th></th><th>Growth ${(R.g*100-2).toFixed(0)}%</th><th>Growth ${(R.g*100).toFixed(0)}% (base)</th><th>Growth ${(R.g*100+2).toFixed(0)}%</th></tr>
+      <tr><td>Price &minus;10%</td><td>${test(-0.1,-0.02)}</td><td>${test(-0.1,0)}</td><td>${test(-0.1,0.02)}</td></tr>
+      <tr><td>Price base</td><td>${test(0,-0.02)}</td><td><b>${test(0,0)}</b></td><td>${test(0,0.02)}</td></tr>
+      <tr><td>Price +10%</td><td>${test(0.1,-0.02)}</td><td>${test(0.1,0)}</td><td>${test(0.1,0.02)}</td></tr></table>
+      <p style="font-size:12px;color:var(--faint);margin-top:8px">If a 10% price cut kills the model, the plan needs pricing evidence before anything else.</p></div>`;
+  }
+
+  out.innerHTML=`
+    <div class="${vc}"><div class="vbig">${vbig}</div><div><h3>${vh}</h3><p>${vp}</p></div></div>
+    <div class="kpis">${kpis.map(k=>`<div class="kpi"><div class="kl">${k[0]}</div><b>${k[1]}</b><div class="kn">${k[2]}</div></div>`).join('')}</div>
+    <div class="card"><h4>Cumulative cash &mdash; ${span} months</h4><div class="chart">${bars}</div><div class="axis"><span>Mo 1</span><span>Mo ${span}</span></div>
+      ${S.pro?'':'<div class="lockedsec" style="margin:12px 0 0"><b>&#128274; Months 13&ndash;36 are Pro.</b> The second and third year is where subscriptions compound and slow ramps get rescued &mdash; or exposed. <button class="lockbtn" onclick="openPro()">Unlock &mdash; '+PRICE_TXT+'</button></div>'}
+    </div>
+    <div class="card"><h4>Monthly model</h4><div class="tscroll"><table>
+      <tr><th>Month</th><th>${unitWord()}</th><th>Revenue</th><th>Gross</th><th>Net</th><th>Cash</th></tr>${rows}</table></div></div>
+    ${sens}
+    <div class="card narr"><h4>Plan skeleton &mdash; starter narrative</h4>${narr}
+      <button class="copybtn" onclick="copyNarr()">&#128203; Copy narrative</button></div>
+    <div class="rowbtns">
+      <button class="smallbtn" id="printBtn">&#128424; Print / save the model ${S.pro?'':'&#128274;'}</button>
+    </div>
+    <div class="cta-neso"><p><b>Want it investor-ready?</b> NESO turns this skeleton into the full written plan and a defensible three-statement model &mdash; market analysis, competitive read, and the numbers an investor will actually probe.</p><a href="${NESO_CTA}" target="_blank" rel="noopener">Have NESO build it &rarr;</a></div>`;
+
+  $('printBtn').onclick=()=>{ if(!S.pro) return openPro('The printable model exhibit is a Pro feature:'); window.print(); };
+}
+function copyNarr(){
+  const t=document.querySelector('.narr'); if(!t) return;
+  const txt=Array.from(t.querySelectorAll('p')).map(p=>p.innerText).join('\n\n');
+  navigator.clipboard&&navigator.clipboard.writeText(txt).then(()=>toast('Narrative copied'),()=>toast('Select and copy manually'));
+}
+
+/* ============ EXAMPLE ============ */
+function loadExample(){
+  $('bname').value='Harborline Coffee';
+  WHAT='prod'; $('whatRow').querySelectorAll('.seg').forEach(x=>x.classList.toggle('on',x.dataset.v==='prod'));
+  MODEL='sale'; $('modelRow').querySelectorAll('.seg').forEach(x=>x.classList.toggle('on',x.dataset.v==='sale'));
+  $('priceNote').textContent='per sale'; $('unitsNote').textContent='sales in month 1';
+  $('priceIn').value=6.5; $('unitsIn').value=2400; $('growIn').value=6; $('cogsIn').value=32;
+  $('payIn').value=9500; $('rentIn').value=3200; $('mktIn').value=800; $('othIn').value=600;
+  $('startupIn').value=85000; $('cashIn').value=110000;
+  run();
+  $('exBanner').style.display='block';
+  toast('Example loaded \u2014 edit anything, it\u2019s yours now');
+  try{ if(typeof gtag==='function') gtag('event','example_load',{tool:'planforge'}); }catch(e){}
+}
+$('exBtn').onclick=loadExample;
+
+/* ============ PRO ============ */
+const REDEEM_URL='https://neso-pro.nesoai-us.workers.dev/redeem'; // <- update after deploying neso-pro-worker.js
+async function redeemCode(c){
+  c=(c||'').trim().toUpperCase();
+  if(!/^PLN-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(c)) return {ok:false,msg:'That code doesn\u2019t look right'};
+  try{
+    const r=await fetch(REDEEM_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tool:'planforge',code:c})});
+    const j=await r.json();
+    if(j.ok) return {ok:true};
+    if(j.reason==='used') return {ok:false,msg:'That code has already been used'};
+    return {ok:false,msg:'That code doesn\u2019t look right'};
+  }catch(e){ return {ok:false,msg:'Couldn\u2019t reach the unlock server \u2014 check your connection and try again'}; }
+}
+function openModal(t,b){$('mTitle').textContent=t;$('mBody').innerHTML=b;$('modal').classList.add('on');}
+$('mClose').onclick=()=>$('modal').classList.remove('on');
+$('modal').onclick=e=>{if(e.target.id==='modal')$('modal').classList.remove('on');};
+function openPro(msg){
+  openModal('PlanForge Pro',`<p>${msg||'One unlock, yours forever on this device:'}</p>
+   <ul style="color:var(--dim);font-size:13.5px;line-height:1.9;padding-left:18px;margin:8px 0 14px">
+     <li>The full 36-month model (free shows 12)</li>
+     <li>Price &amp; growth sensitivity table</li>
+     <li>Printable model exhibit</li></ul>
+   <a class="lockbtn" href="${BUY_URL}" target="_blank" rel="noopener">Request Pro &mdash; ${PRICE_TXT} &rarr;</a>
+   <div style="display:flex;gap:8px;align-items:center;margin-top:14px">
+     <input class="tin" id="codeIn" placeholder="PLN-XXXX-XXXX" style="flex:1">
+     <button class="lockbtn" id="applyCode" style="background:var(--green);color:#04211a;margin:0">Apply</button></div>`);
+  $('applyCode').onclick=async()=>{const b=$('applyCode');b.disabled=true;b.textContent='\u2026';
+    const r=await redeemCode($('codeIn').value);b.disabled=false;b.textContent='Apply';
+    if(r.ok){S.pro=true;save();proUI();$('modal').classList.remove('on');toast('\ud83c\udf89 Pro unlocked');run();}
+    else toast(r.msg);};
+}
+function proUI(){$('proBtn').textContent=S.pro?'\u2713 Pro':'Go Pro';$('proBtn').className='pill '+(S.pro?'prodone':'pro');}
+$('proBtn').onclick=()=>S.pro?toast('Pro is active on this device \u2713'):openPro();
+
+/* ============ GUIDED TOUR ============ */
+const TOUR=[
+ ['priceIn','Step 1 of 5','It starts with two numbers: <b>your price and your month-one volume</b>. Everything else &mdash; break-even, runway, the verdict &mdash; is built from these.'],
+ ['growIn','Step 2 of 5','<b>Growth is the honest number.</b> 3&ndash;5%/month is steady; 10%+ needs marketing money behind it. The sensitivity table (Pro) shows exactly how much this assumption matters.'],
+ ['payIn','Step 3 of 5','<b>Fixed costs are the treadmill</b> &mdash; you pay them whether or not sales come. Include your own pay; a plan that only works with free labor isn\u2019t a plan.'],
+ ['out','Step 4 of 5','The <b>verdict updates live</b>: break-even month, cash low point, the monthly model, and a starter narrative you can copy straight into a written plan.'],
+ ['exBtn','Step 5 of 5','Fastest way to learn it: <b>load the example</b> and stress it \u2014 cut the price, slow the growth, watch the break-even move. Nothing is saved anywhere but this device.']
+];
+let tourI=-1;
+function tourClear(){document.querySelectorAll('.tourhl').forEach(e=>e.classList.remove('tourhl'));}
+function tourShow(i){
+  tourClear();
+  if(i>=TOUR.length){ $('tourCard').classList.remove('on'); try{localStorage.setItem('planforge.tour','done')}catch(e){}; return; }
+  tourI=i; const [id,st,tx]=TOUR[i];
+  const el=$(id); if(el){ el.classList.add('tourhl'); el.scrollIntoView({behavior:'smooth',block:'center'}); }
+  $('tourStep').textContent=st; $('tourText').innerHTML=tx;
+  $('tourNext').textContent = i===TOUR.length-1 ? 'Done' : 'Next';
+  $('tourCard').classList.add('on');
+}
+$('tourNext').onclick=()=>tourShow(tourI+1);
+$('tourSkip').onclick=()=>tourShow(TOUR.length);
+$('tourBtn').onclick=()=>tourShow(0);
+setTimeout(()=>{ try{ if(!localStorage.getItem('planforge.tour')) tourShow(0); }catch(e){} },1100);
+
+proUI(); run();
+</script>
+</body></html>
