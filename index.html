@@ -160,6 +160,22 @@ footer{border-top:1px solid var(--line);padding:20px 18px;font-size:12px;color:v
 #logo .byneso a{color:inherit;text-decoration:none;border-bottom:1px solid transparent}
 #logo .byneso a:hover{color:var(--ink,#e9eef4);border-bottom-color:currentColor}
 #logo .lgwrap{display:flex;flex-direction:column;line-height:1.12}
+
+/* ---- tools display face · 2 Aug 2026 ----------------------------------
+   Inside a tool the interface is a product and should read like one: Inter at
+   display weight with negative tracking, rather than the serif that carries the
+   practice voice on nesohq.com and the landing pages. No new font loads — this
+   is weight and tracking on a face the tools already ship.
+   The answer section below the fold deliberately keeps normal tracking; it is
+   prose for a reader, not chrome. ------------------------------------------ */
+h1, h2, h3, .h1, .hero h1, .card h2, .sec h2 {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.028em !important;
+}
+h1, .hero h1 { letter-spacing: -0.034em !important; }
+h3, .card h3 { font-weight: 700 !important; letter-spacing: -0.018em !important; }
+.nqa h2, .nqa dt { letter-spacing: -0.012em !important; font-weight: 700 !important; }
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "PlanForge", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web browser)", "url": "https://planforge.nesohq.com/", "description": "Nine numbers become a monthly financial model: revenue, break-even, runway and a business-plan skeleton. Free in your browser, 12 of 36 months shown; $29 unlocks the full horizon and the print.", "browserRequirements": "Runs in any modern browser. No account required.", "publisher": {"@type": "Organization", "name": "NESO", "url": "https://nesohq.com/", "email": "hello@nesohq.com"}, "isAccessibleForFree": true, "offers": [{"@type": "Offer", "name": "PlanForge (free)", "price": "0", "priceCurrency": "USD", "description": "The complete model with your own numbers; 12 of 36 months, with the cap stated."}, {"@type": "Offer", "name": "PlanForge Pro", "price": "29", "priceCurrency": "USD", "url": "https://planforge.nesohq.com/", "description": "One-time unlock, owned forever: the full 36 months, sensitivity table, printable exhibit."}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I work out my break-even point?", "acceptedAnswer": {"@type": "Answer", "text": "Divide fixed costs by contribution margin per unit — the price minus the variable cost of delivering one unit. The answer is how many units cover the fixed base each month. Most first models get this wrong by treating owner pay or loan payments as variable when they are fixed."}}, {"@type": "Question", "name": "How much runway do I actually have?", "acceptedAnswer": {"@type": "Answer", "text": "Cash on hand divided by average monthly net burn, where burn is cash out minus cash in — not profit. A business can be profitable on paper and out of runway, because invoices paid in sixty days do not cover payroll in thirty."}}, {"@type": "Question", "name": "What goes in a business plan's financial section?", "acceptedAnswer": {"@type": "Answer", "text": "A monthly revenue build with volume and price stated separately, fixed and variable costs split, a break-even point, a cash-flow projection long enough to show the trough, and the assumptions written down where a reader can argue with them. Lenders read the assumptions before the totals."}}, {"@type": "Question", "name": "How many months should a financial projection cover?", "acceptedAnswer": {"@type": "Answer", "text": "Thirty-six is the standard ask for a loan or a plan, with the first twelve monthly and the rest quarterly if you prefer. Shorter than twenty-four rarely shows the point where growth stops consuming cash, which is the thing the projection exists to find."}}]}</script>
