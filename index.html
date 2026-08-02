@@ -6,6 +6,13 @@
 <title>PlanForge — will your business model hold?</title>
 <meta name="description" content="PlanForge turns your pricing, costs, and growth into a 12–36 month financial model: revenue, break-even, runway, and a plan skeleton you can build on — free, in your browser.">
 <link rel="canonical" href="https://planforge.nesohq.com/">
+<link rel="manifest" href="/manifest.webmanifest">
+<meta name="theme-color" content="#34d399">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="PlanForge">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NESO">
@@ -161,23 +168,20 @@ footer{border-top:1px solid var(--line);padding:20px 18px;font-size:12px;color:v
 #logo .byneso a:hover{color:var(--ink,#e9eef4);border-bottom-color:currentColor}
 #logo .lgwrap{display:flex;flex-direction:column;line-height:1.12}
 
-/* ---- tools display face · 2 Aug 2026 ----------------------------------
+/* ---- tools display face ------------------------------------------------
    Inside a tool the interface is a product and should read like one: Inter at
    display weight with negative tracking, rather than the serif that carries the
-   practice voice on nesohq.com and the landing pages. No new font loads — this
-   is weight and tracking on a face the tools already ship.
-   The answer section below the fold deliberately keeps normal tracking; it is
-   prose for a reader, not chrome. ------------------------------------------ */
+   practice voice. No new font loads. The answer section below the fold keeps
+   normal tracking; it is prose for a reader, not chrome. -------------------- */
 h1, h2, h3, .h1, .hero h1, .card h2, .sec h2 {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.028em !important;
+  font-weight: 800 !important; letter-spacing: -0.028em !important;
 }
 h1, .hero h1 { letter-spacing: -0.034em !important; }
 h3, .card h3 { font-weight: 700 !important; letter-spacing: -0.018em !important; }
 .nqa h2, .nqa dt { letter-spacing: -0.012em !important; font-weight: 700 !important; }
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "PlanForge", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web browser)", "url": "https://planforge.nesohq.com/", "description": "Nine numbers become a monthly financial model: revenue, break-even, runway and a business-plan skeleton. Free in your browser, 12 of 36 months shown; $29 unlocks the full horizon and the print.", "browserRequirements": "Runs in any modern browser. No account required.", "publisher": {"@type": "Organization", "name": "NESO", "url": "https://nesohq.com/", "email": "hello@nesohq.com"}, "isAccessibleForFree": true, "offers": [{"@type": "Offer", "name": "PlanForge (free)", "price": "0", "priceCurrency": "USD", "description": "The complete model with your own numbers; 12 of 36 months, with the cap stated."}, {"@type": "Offer", "name": "PlanForge Pro", "price": "29", "priceCurrency": "USD", "url": "https://planforge.nesohq.com/", "description": "One-time unlock, owned forever: the full 36 months, sensitivity table, printable exhibit."}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "PlanForge", "applicationCategory": "FinanceApplication", "operatingSystem": "Any (web browser)", "url": "https://planforge.nesohq.com/", "description": "Nine numbers become a monthly financial model: revenue, break-even, runway and a business-plan skeleton. Free in your browser, 12 of 36 months shown; $29 unlocks the full horizon and the print.", "browserRequirements": "Runs in any modern browser. No account required.", "publisher": {"@type": "Organization", "name": "NESO", "url": "https://nesohq.com/", "contactPoint": {"@type": "ContactPoint", "contactType": "customer support", "telephone": "+1-901-295-0322", "url": "https://nesohq.com/"}}, "isAccessibleForFree": true, "offers": [{"@type": "Offer", "name": "PlanForge (free)", "price": "0", "priceCurrency": "USD", "description": "The complete model with your own numbers; 12 of 36 months, with the cap stated."}, {"@type": "Offer", "name": "PlanForge Pro", "price": "29", "priceCurrency": "USD", "url": "https://planforge.nesohq.com/", "description": "One-time unlock, owned forever: the full 36 months, sensitivity table, printable exhibit."}]}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I work out my break-even point?", "acceptedAnswer": {"@type": "Answer", "text": "Divide fixed costs by contribution margin per unit — the price minus the variable cost of delivering one unit. The answer is how many units cover the fixed base each month. Most first models get this wrong by treating owner pay or loan payments as variable when they are fixed."}}, {"@type": "Question", "name": "How much runway do I actually have?", "acceptedAnswer": {"@type": "Answer", "text": "Cash on hand divided by average monthly net burn, where burn is cash out minus cash in — not profit. A business can be profitable on paper and out of runway, because invoices paid in sixty days do not cover payroll in thirty."}}, {"@type": "Question", "name": "What goes in a business plan's financial section?", "acceptedAnswer": {"@type": "Answer", "text": "A monthly revenue build with volume and price stated separately, fixed and variable costs split, a break-even point, a cash-flow projection long enough to show the trough, and the assumptions written down where a reader can argue with them. Lenders read the assumptions before the totals."}}, {"@type": "Question", "name": "How many months should a financial projection cover?", "acceptedAnswer": {"@type": "Answer", "text": "Thirty-six is the standard ask for a loan or a plan, with the first twelve monthly and the rest quarterly if you prefer. Shorter than twenty-four rarely shows the point where growth stops consuming cash, which is the thing the projection exists to find."}}]}</script>
 </head>
 <body>
@@ -277,7 +281,7 @@ h3, .card h3 { font-weight: 700 !important; letter-spacing: -0.018em !important;
   <dt>How many months should a financial projection cover?</dt>
   <dd>Thirty-six is the standard ask for a loan or a plan, with the first twelve monthly and the rest quarterly if you prefer. Shorter than twenty-four rarely shows the point where growth stops consuming cash, which is the thing the projection exists to find.</dd>
 </dl>
-<p class="nqa-foot">PlanForge is free to run in your browser with no account. Pro is a one-time $29 unlock that adds the full 36-month horizon, the sensitivity table and the printable exhibit — owned forever, not a subscription. Built by <a href="https://nesohq.com/">NESO</a>, an advisory and tools practice for business and real estate. Questions: <a href="mailto:hello@nesohq.com">hello@nesohq.com</a>.</p>
+<p class="nqa-foot">PlanForge is free to run in your browser with no account, and it installs — see below to put it on your phone or desktop.  Pro is a one-time $29 unlock that adds the full 36-month horizon, the sensitivity table and the printable exhibit — owned forever, not a subscription. Built by <a href="https://nesohq.com/">NESO</a>, an advisory and tools practice for business and real estate. Questions: <a href="https://neso-queue.nesoai-us.workers.dev/form/intake?source=tool-planforge">send them here</a>.</p>
 </section>
 <footer><span class="np">PlanForge &middot; v1.10 &middot; <a href="https://neso-queue.nesoai-us.workers.dev/form/feedback?source=planforge" target="_blank" rel="noopener">Feedback</a> &middot; &copy; 2026 NESO &mdash; all rights reserved &middot; </span>Educational planning estimates only. Verify with your CPA and advisors. Sister tools: <a href="https://grantfit.nesohq.com/">GrantFit</a> + <a href="https://capstack.nesohq.com/">CapStack</a>.</footer>
 <div id="modal"><div id="mcard"><button class="closex" id="mClose">&times;</button><h2 id="mTitle"></h2><div id="mBody"></div></div></div>
@@ -531,4 +535,79 @@ proUI(); run();
 @media print{#toTop{display:none!important}}
 </style>
 <script>(function(){var b=document.getElementById('toTop');function chk(){if(window.scrollY>500)b.classList.add('on');else b.classList.remove('on');}window.addEventListener('scroll',chk,{passive:true});chk();})();</script>
+<script>
+/* Installable as a web app: manifest + icons + this registration. No store, no
+   review, no 15-30% platform fee on a digital unlock. The worker caches nothing
+   by design — see sw.js. */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/sw.js').catch(function () { /* not fatal */ });
+  });
+}
+</script>
+
+<style>
+.nqi{margin-top:16px;padding:14px 16px;border:1px solid rgba(127,127,127,.3);border-radius:12px;
+font-size:14px;line-height:1.55;display:none}
+.nqi b{display:block;font-size:14.5px;margin-bottom:4px}
+.nqi p{margin:0;opacity:.82;font-size:13.5px}
+.nqi button{font:inherit;font-size:13.5px;font-weight:700;margin-top:10px;padding:9px 18px;
+border-radius:999px;border:1.5px solid currentColor;background:transparent;color:inherit;cursor:pointer}
+.nqi button:hover{opacity:.75}
+.nqi ol{margin:8px 0 0 18px;padding:0;font-size:13.5px;opacity:.82}
+.nqi li{margin-bottom:3px}
+@media print{.nqi{display:none!important}}
+</style>
+<script>
+/* Install helper. Three states, because the three platforms genuinely differ and
+   telling everyone to "click install" would be wrong for roughly half of them:
+     Chrome / Edge / Android — a real button, using the deferred prompt event.
+     iOS Safari              — no API exists; show the actual tap sequence.
+     Already installed       — say nothing at all.
+   Lives inside the answer section, below the fold: somebody who has not run the
+   tool yet has no reason to install it. */
+(function(){
+  var host = document.querySelector('.nqa-foot') || document.querySelector('.nqa');
+  if(!host) return;
+  var box = document.createElement('div');
+  box.className = 'nqi';
+  host.parentNode.insertBefore(box, host.nextSibling);
+
+  var standalone = window.matchMedia('(display-mode: standalone)').matches
+                   || window.navigator.standalone === true;
+  if(standalone) return;                       // already installed — nothing to say
+
+  var ua = navigator.userAgent || '';
+  var isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+  var deferred = null;
+
+  window.addEventListener('beforeinstallprompt', function(e){
+    e.preventDefault(); deferred = e;
+    box.innerHTML = '<b>Install PlanForge on this device</b>' +
+      '<p>It opens in its own window, keeps working the same way, and takes about two seconds. ' +
+      'Nothing is downloaded from a store and no account is created.</p>' +
+      '<p style="margin-top:7px"><b>If you are planning to buy Pro, install first, then enter your code.</b> ' +
+      'A code can only be redeemed once, and the installed app keeps its own unlock.</p>' +
+      '<button type="button">Install PlanForge</button>';
+    box.style.display = 'block';
+    box.querySelector('button').addEventListener('click', function(){
+      if(!deferred) return;
+      deferred.prompt();
+      deferred.userChoice.then(function(){ deferred = null; box.style.display = 'none'; });
+    });
+  });
+
+  if(isIOS){
+    box.innerHTML = '<b>Add PlanForge to your Home Screen</b>' +
+      '<p>iPhone and iPad do this from the Share menu rather than a button:</p>' +
+      '<ol><li>Tap the Share icon — the square with an arrow, at the bottom of Safari.</li>' +
+      '<li>Scroll down and tap <b>Add to Home Screen</b>.</li>' +
+      '<li>Tap <b>Add</b>. PlanForge appears with the other apps.</li></ol>' +
+      '<p style="margin-top:9px"><b>Buying Pro? Add to Home Screen first, then enter your code there.</b> ' +
+      'On iPhone the Home Screen app keeps its own unlock, separate from Safari, and a code can only be redeemed once.</p>';
+    box.style.display = 'block';
+  }
+})();
+</script>
+
 </body></html>
