@@ -1,0 +1,35 @@
+# PlanForge
+
+> PlanForge turns your pricing, costs, and growth into a 12–36 month financial model: revenue, break-even, runway, and a plan skeleton you can build on.
+
+PlanForge is a free web tool at https://planforge.nesohq.com/. It runs in the browser with no account.
+It is for founders and small-business owners building a plan or preparing for a lender.
+
+## Questions PlanForge answers
+
+- **How do I work out my break-even point?** Divide fixed costs by contribution margin per unit — the price minus the variable cost of delivering one unit.
+- **How much runway do I actually have?** Cash on hand divided by average monthly net burn, where burn is cash out minus cash in — not profit.
+- **What goes in a business plan's financial section?** A monthly revenue build with volume and price stated separately, fixed and variable costs split, a break-even point, a cash-flow projection long enough to show the trough, and the assumptions written down where a reader can argue with them.
+- **How many months should a financial projection cover?** Thirty-six is the standard ask for a loan or a plan, with the first twelve monthly and the rest quarterly if you prefer.
+
+## Use it
+
+- [Open PlanForge](https://planforge.nesohq.com/)
+
+## About NESO
+
+PlanForge is made by NESO HQ LLC, which offers advisory services, research reports and free tools for founders,
+small businesses, developers and municipalities: https://nesohq.com/ (its llms.txt: https://nesohq.com/llms.txt).
+Questions: hello@nesohq.com · (901) 295-0322.
+
+## Other free NESO tools
+
+- [GrantFit](https://grantfit.nesohq.com/)
+- [MarketFit](https://marketfit.nesohq.com/)
+- [MarketScope](https://marketscope.nesohq.com/)
+- [CapStack](https://capstack.nesohq.com/)
+- [ProForma](https://proforma.nesohq.com/)
+- [SiteShaper](https://siteshaper.nesohq.com/)
+- [BuildBrief](https://buildbrief.nesohq.com/)
+- [Bird's Eye instant read](https://birdseye.nesohq.com/): a free first look at a parcel, with written reports quoted to scope.
+- [NESO for Contractors](https://contractors.nesohq.com/): free public bids and state-by-state guides for contractors.
