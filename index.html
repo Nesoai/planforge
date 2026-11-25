@@ -303,8 +303,8 @@ const KEY='planforge.v1';
 let S=Object.assign({pro:false},(()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}})());
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
 /* Pro trial codes (25 Nov 2026): a TRY-XXXX-XXXX code unlocks Pro until its end date, checked by
-   contractors.nesohq.com/api/pro-trial when applied and again every 3 days; on the end date Pro locks again. */
-const TOOL='planforge', TRIAL_URL='https://contractors.nesohq.com/api/pro-trial';
+   HQ (hq.nesohq.com/pub/pro-trial) when applied and again every 3 days; on the end date Pro locks again. */
+const TOOL='planforge', TRIAL_URL='https://hq.nesohq.com/pub/pro-trial';
 function trialEnded(){S.pro=false;delete S.trial;save();setTimeout(()=>{try{proUI();run();toast('Your Pro trial has ended. Thanks for trying it!');}catch(e){}},1200);}
 (function trialCheck(){const t=S.trial;if(!t||!S.pro)return;
   const today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Chicago'}).format(new Date());
