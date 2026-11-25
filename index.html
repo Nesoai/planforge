@@ -302,6 +302,17 @@ const $=id=>document.getElementById(id);
 const KEY='planforge.v1';
 let S=Object.assign({pro:false},(()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}})());
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+/* Pro trial codes (25 Nov 2026): a TRY-XXXX-XXXX code unlocks Pro until its end date, checked by
+   contractors.nesohq.com/api/pro-trial when applied and again every 3 days; on the end date Pro locks again. */
+const TOOL='planforge', TRIAL_URL='https://contractors.nesohq.com/api/pro-trial';
+function trialEnded(){S.pro=false;delete S.trial;save();setTimeout(()=>{try{proUI();run();toast('Your Pro trial has ended. Thanks for trying it!');}catch(e){}},1200);}
+(function trialCheck(){const t=S.trial;if(!t||!S.pro)return;
+  const today=new Intl.DateTimeFormat('en-CA',{timeZone:'America/Chicago'}).format(new Date());
+  if(today>t.exp)return trialEnded();
+  if(Date.now()-(t.at||0)<3*864e5||!navigator.onLine)return;
+  fetch(TRIAL_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tool:TOOL,code:t.code})})
+    .then(r=>r.json()).then(j=>{if(j.ok){t.exp=j.exp;t.at=Date.now();save();}else if(['expired','unknown','tool'].includes(j.reason))trialEnded();}).catch(()=>{});
+})();
 function toast(t){const x=$('toast');x.textContent=t;x.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>x.classList.remove('on'),2600)}
 const fm=n=>'$'+Math.round(n).toLocaleString('en-US');
 const fk=n=>Math.abs(n)>=1000?('$'+(n/1000).toFixed(n%1000===0?0:1)+'k'):fm(n);
@@ -463,6 +474,12 @@ $('exBtn').onclick=loadExample;
 const REDEEM_URL='https://neso-pro.nesoai-us.workers.dev/redeem'; // <- update after deploying neso-pro-worker.js
 async function redeemCode(c){
   c=(c||'').trim().toUpperCase();
+  if(/^TRY-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(c)){
+    try{const j=await fetch(TRIAL_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tool:TOOL,code:c})}).then(r=>r.json());
+      if(j.ok) return {ok:true,trial:{code:c,exp:j.exp,at:Date.now()}};
+      return {ok:false,msg:j.reason==='expired'?'That trial has ended':'That code doesn\u2019t look right'};
+    }catch(e){ return {ok:false,msg:'Couldn\u2019t reach the unlock server \u2014 check your connection and try again'}; }
+  }
   if(!/^PLN-[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(c)) return {ok:false,msg:'That code doesn\u2019t look right'};
   try{
     const r=await fetch(REDEEM_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tool:'planforge',code:c})});
@@ -487,11 +504,11 @@ function openPro(msg){
      <button class="lockbtn" id="applyCode" style="background:var(--green);color:#04211a;margin:0">Apply</button></div>`);
   $('applyCode').onclick=async()=>{const b=$('applyCode');b.disabled=true;b.textContent='\u2026';
     const r=await redeemCode($('codeIn').value);b.disabled=false;b.textContent='Apply';
-    if(r.ok){S.pro=true;save();proUI();$('modal').classList.remove('on');toast('\ud83c\udf89 Pro unlocked');run();}
+    if(r.ok){S.pro=true;if(r.trial)S.trial=r.trial;else delete S.trial;save();proUI();$('modal').classList.remove('on');toast(r.trial?'\ud83c\udf89 Pro trial unlocked through '+r.trial.exp:'\ud83c\udf89 Pro unlocked');run();}
     else toast(r.msg);};
 }
 function proUI(){const _pb=document.getElementById("probar");if(_pb)_pb.style.display=S.pro?"none":"";$('proBtn').textContent=S.pro?'\u2713 Pro':'Go Pro';$('proBtn').className='pill '+(S.pro?'prodone':'pro');}
-$('proBtn').onclick=()=>S.pro?toast('Pro is active on this device \u2713'):openPro();
+$('proBtn').onclick=()=>S.pro?toast(S.trial?'Pro trial active through '+S.trial.exp:'Pro is active on this device \u2713'):openPro();
 
 /* ============ GUIDED TOUR ============ */
 const TOUR=[
